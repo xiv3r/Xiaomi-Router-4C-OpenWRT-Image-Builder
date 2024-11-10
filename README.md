@@ -1,4 +1,5 @@
-## Openwrt Image Build Guide for Xiaomi Mi Router 4C
+## Openwrt stable image rebuild guide for Xiaomi Mi Router 4C
+> you can rebuild any openwrt stable released firmware for any specific router using with this guides.
 
 ### Ubuntu/Debian Dependencies 
 ```sh
