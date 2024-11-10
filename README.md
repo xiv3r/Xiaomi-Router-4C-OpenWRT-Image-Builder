@@ -16,9 +16,9 @@ tar -J -x -f openwrt-imagebuilder-*.tar.xz
 ```sh
 cd openwrt-imagebuilder-*/
 ```     
-## List installed packages
+## List installed packages from Openwrt stable released.
 ```sh
-opkg list-installed | cut -f 1 -d ' ' > /root/installed_packages.txt
+echo $(opkg list-installed | sed -e "s/\s.*$//")
 ```
 ## Build:
 
