@@ -16,7 +16,8 @@ tar -J -x -f openwrt-imagebuilder-*.tar.xz
 ```sh
 cd openwrt-imagebuilder-*/
 ```     
-## List installed packages from Openwrt stable released.
+## List installed packages from Openwrt stable released
+> pulled from the 22.03.7 stable release version
 ```sh
 echo $(opkg list-installed | sed -e "s/\s.*$//")
 ```
