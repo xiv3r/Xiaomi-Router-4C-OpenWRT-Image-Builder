@@ -1,6 +1,6 @@
 ## Openwrt Image Build Guide for Xiaomi Mi Router 4C
 
-### Dependencies 
+### Ubuntu/Debian Dependencies 
 ```sh
 sudo apt install build-essential libncurses-dev zlib1g-dev gawk wget git gettext libssl-dev xsltproc rsync wget unzip python3 python3-distutils -y
 ```
