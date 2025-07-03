@@ -25,7 +25,7 @@ echo $(opkg list-installed | sed -e "s/\s.*$//")
 ## Default Package Build
 > you can add any package you want
 
-`make image PROFILE="xiaomi_mi-router-4c" PACKAGES="abase-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci"`
+`make image PROFILE="xiaomi_mi-router-4c" PACKAGES="abase-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci kmod-mt76 kmod-mtd-rw iw-full UDPspeeder zram-swap nano"`
 
 # Clean existing configuration
 ```sh
