@@ -8,7 +8,7 @@ sudo apt install build-essential libncurses-dev zlib1g-dev gawk wget git gettext
 ## Download image builder:
 > choose your desired version to build either a snapshot or the latest version from here: `https://archive.openwrt.org/releases`
 ```sh
-wget https://archive.openwrt.org/releases/24.10.1/targets/ramips/mt76x8/openwrt-imagebuilder-24.10.1-ramips-mt76x8.Linux-x86_64.tar.xz
+wget https://archive.openwrt.org/releases/24.10.1/targets/ramips/mt76x8/openwrt-imagebuilder-24.10.1-ramips-mt76x8.Linux-x86_64.tar.zst
 ```
 ## Unpack:
 ```sh
