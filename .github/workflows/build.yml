@@ -26,7 +26,7 @@ jobs:
         tar --zstd -xvf openwrt-imagebuilder-*.tar.zst
         cd openwrt-imagebuilder-*/
         make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files ca-bundle dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci kmod-mt76 kmod-mtd-rw dnsmasq-full iw-full ip-full ethtool-full UDPspeeder zram-swap nano netdiscover nmap arp-scan"
-        
+        cp bin/targets/ramips/mt7628/*.bin ~/downloads
         
     - name: Create and push tag
       id: tag_version
