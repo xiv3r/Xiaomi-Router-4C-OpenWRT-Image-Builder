@@ -1,0 +1,46 @@
+name: build xiaomi 4c
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]  
+    
+jobs:
+  download-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Download files
+      run: |
+        mkdir -p downloads
+        cd downloads
+        
+    - name: Create and push tag
+      id: tag_version
+      run: |
+        if [ "${{ github.event_name }}" == "release" ]; then
+          VERSION="${{ github.event.release.tag_name }}"
+        else
+          VERSION="openwrt-xiaomi-4c"
+        fi
+        
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git tag -a "$VERSION" -m "Release $VERSION"
+        git push origin "$VERSION"
+        
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Upload files to release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.tag_version.outputs.version }}
+        files: |
+          downloads/*.*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
