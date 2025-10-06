@@ -32,7 +32,7 @@ jobs:
         if [ "${{ github.event_name }}" == "release" ]; then
           VERSION="${{ github.event.release.tag_name }}"
         else
-          VERSION="openwrt-xiaomi-4c"
+          VERSION="openwrt-24.10.3-xiaomi-4c"
         fi
         
         git config --local user.email "action@github.com"
