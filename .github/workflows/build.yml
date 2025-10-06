@@ -3,7 +3,9 @@ name: build xiaomi 4c
 on:
   workflow_dispatch:
   release:
-    types: [published]  
+    types: [published]
+  schedule:
+    - cron: '* * 1 * *'
     
 jobs:
   download-and-release:
