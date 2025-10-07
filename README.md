@@ -1,18 +1,8 @@
-## Openwrt stable stable firmware image builder for Xiaomi Mi Router 4C
-> you can rebuild any openwrt stable firmware image for any specific router
-* you can edit the workflows and change this
-`https://github.com/{your name}/Xiaomi-Router-4C-OpenWRT-Image-Builder/blob/main/.github/workflows/build.yml`
-```
-         wget https://archive.openwrt.org/releases/24.10.3/targets/ramips/mt76x8/openwrt-imagebuilder-24.10.3/ramips/mt76x8.Linux-x86_64.tar.zst
-        tar --zstd -xvf openwrt-imagebuilder-*.tar.zst
-        cd openwrt-imagebuilder-*/
-        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci iw-full ip-full ethtool-full UDPspeeder zram-swap nano netdiscover nmap luci-app-ttyd"
-```
-* for the download file
-```
-downloads/openwrt-imagebuilder-24.10.3-ramips-mt76x8.Linux-x86_64/bin/targets/ramips/mt76x8/*.bin
-```
-=> See the [Openwrt Image Builder](https://openwrt.org/docs/guide-user/additional-software/imagebuilder)
+# Openwrt stable firmware image builder for Xiaomi Mi Router 4C
+> This repo is alternative to openwrt firmware selector.
+
+> You can build any openwrt stable firmware image for a specific openwrt router.
+
 
 # Build using GitHub server
 => [Click this Templates](https://github.com/xiv3r/Xiaomi-Router-4C-OpenWRT-Image-Builder/generate)
@@ -21,6 +11,26 @@ downloads/openwrt-imagebuilder-24.10.3-ramips-mt76x8.Linux-x86_64/bin/targets/ra
 
 => The firmware is uploaded to your release page you can download and flash it.
 
+## Custom build
+> Edit the `.github/workflows/build.yml` from the repo and change.
+
+> The default configuration is for xiaomi 4c router
+
+=> [ releases ] https://archive.openwrt.org/releases
+```
+        wget https://archive.openwrt.org/releases/24.10.3/targets/ramips/mt76x8/openwrt-imagebuilder-24.10.3/ramips/mt76x8.Linux-x86_64.tar.zst
+        tar --zstd -xvf openwrt-imagebuilder-*.tar.zst
+        cd openwrt-imagebuilder-*/
+        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci iw-full ip-full ethtool-full UDPspeeder zram-swap nano netdiscover nmap luci-app-ttyd"
+```
+> Edit the upload file path 
+```
+downloads/openwrt-imagebuilder-24.10.3-ramips-mt76x8.Linux-x86_64/bin/targets/ramips/mt76x8/*.bin
+```
+=> See the [Openwrt Image Builder](https://openwrt.org/docs/guide-user/additional-software/imagebuilder)
+
+
+---------------
 # Build Locally 
 ## Ubuntu/Debian Dependencies 
 ```
