@@ -1,5 +1,5 @@
 ## Openwrt stable stable firmware image builder for Xiaomi Mi Router 4C
-> you can rebuild any openwrt stable firmware image for any specific router using this guide.
+> you can rebuild any openwrt stable firmware image for any specific router
 
 # Build using GitHub server
 => [Click this Templates](https://github.com/xiv3r/Xiaomi-Router-4C-OpenWRT-Image-Builder/generate)
