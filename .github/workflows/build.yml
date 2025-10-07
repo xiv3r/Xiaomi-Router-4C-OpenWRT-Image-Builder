@@ -84,6 +84,6 @@ jobs:
         tag_name: ${{ steps.get_tag.outputs.tag_name }}
         files: |
           downloads/openwrt-imagebuilder-24.10.3-ramips-mt76x8.Linux-x86_64/bin/targets/ramips/mt76x8/*.bin
-        overwrite: true
+        replace: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
