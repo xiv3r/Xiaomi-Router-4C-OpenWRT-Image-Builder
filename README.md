@@ -7,7 +7,7 @@ sudo apt update
 sudo apt install build-essential file libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-full python3-venv -y
 ```
 ## Download image builder:
-> choose your desired version to build either a snapshot or the latest version from here: `https://archive.openwrt.org/releases](https://archive.openwrt.org/releases/24.10.3/targets/ramips/mt76x8/`
+> choose your desired version to build either a snapshot or the latest version from here: `https://archive.openwrt.org/releases/24.10.3/targets/ramips/mt76x8/`
 ```
 wget https://archive.openwrt.org/releases/24.10.3/targets/ramips/mt76x8/openwrt-imagebuilder-24.10.3-ramips-mt76x8.Linux-x86_64.tar.zst
 ```
