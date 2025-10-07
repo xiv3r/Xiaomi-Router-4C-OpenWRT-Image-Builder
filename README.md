@@ -1,9 +1,6 @@
 # Openwrt stable firmware image builder for Xiaomi Mi Router 4C
 > This repo is alternative to openwrt firmware selector.
 
-> You can build any openwrt stable firmware image for a specific openwrt router.
-
-
 # Build using GitHub server
 => [Click this Templates](https://github.com/xiv3r/Xiaomi-Router-4C-OpenWRT-Image-Builder/generate)
 
@@ -11,7 +8,7 @@
 
 => The firmware is uploaded to your release page you can download and flash it.
 
-## Custom build
+### Custom build
 > Edit the `.github/workflows/build.yml` from the repo and change.
 
 > The default configuration is for xiaomi 4c router
@@ -32,29 +29,29 @@ downloads/openwrt-imagebuilder-24.10.3-ramips-mt76x8.Linux-x86_64/bin/targets/ra
 
 ---------------
 # Build Locally 
-## Ubuntu/Debian Dependencies 
+### Ubuntu/Debian Dependencies 
 ```
 sudo apt update
 sudo apt install build-essential file libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-full python3-venv -y
 ```
-## Download image builder:
+### Download image builder
 > choose your desired version to build either a snapshot or the latest version from here: `https://archive.openwrt.org/releases/24.10.3/targets/ramips/mt76x8/`
 ```
 wget https://archive.openwrt.org/releases/24.10.3/targets/ramips/mt76x8/openwrt-imagebuilder-24.10.3-ramips-mt76x8.Linux-x86_64.tar.zst
 ```
-## Unpack:
+### Unpack
 ```
 tar --zstd -xvf openwrt-imagebuilder-*.tar.zst
 ```
 ```
 cd openwrt-imagebuilder-*/
 ```     
-## Build
+### Build
 > you can add any package you want
 ```
 make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci kmod-mt76 kmod-mtd-rw iw-full ethtool-full ip-full UDPspeeder zram-swap nano netdiscover"
 ```
-## Clean existing configuration
+### Clean existing configuration
 ```sh
 make clean
 ```
