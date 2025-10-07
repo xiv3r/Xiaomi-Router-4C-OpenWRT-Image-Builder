@@ -1,8 +1,14 @@
 ## Openwrt stable stable firmware image builder for Xiaomi Mi Router 4C
 > you can rebuild any openwrt stable firmware image for any specific router using this guide.
 
+# Build using GitHub server
+=> [Click this Templates](https://github.com/xiv3r/Xiaomi-Router-4C-OpenWRT-Image-Builder/generate)
+=> Go to Actions => build => run workflows and wait until successful build 
+=> The firmware is uploaded to your release page you can download and flash it.
+
+# Build Locally 
 ## Ubuntu/Debian Dependencies 
-```sh
+```
 sudo apt update
 sudo apt install build-essential file libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-full python3-venv -y
 ```
@@ -21,9 +27,9 @@ cd openwrt-imagebuilder-*/
 ## Build
 > you can add any package you want
 ```
-make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci kmod-mt76 kmod-mtd-rw iw-full hostapd-full ethtool-full ip-full UDPspeeder zram-swap nano netdiscover"
+make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci kmod-mt76 kmod-mtd-rw iw-full ethtool-full ip-full UDPspeeder zram-swap nano netdiscover"
 ```
-# Clean existing configuration
+## Clean existing configuration
 ```sh
 make clean
 ```
