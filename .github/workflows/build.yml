@@ -1,4 +1,4 @@
-name: build xiaomi 4c
+name: build xiaomi 4c firmware
 
 on:
   workflow_dispatch:
@@ -28,47 +28,59 @@ jobs:
         cd openwrt-imagebuilder-*/
         make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci iw-full ip-full ethtool-full UDPspeeder zram-swap nano netdiscover nmap luci-app-ttyd"
         
-    - name: Create and push tag
-      id: tag_version
+    - name: Determine release tag
+      id: get_tag
       run: |
         if [ "${{ github.event_name }}" == "release" ]; then
-          VERSION="${{ github.event.release.tag_name }}"
+          TAG_NAME="${{ github.event.release.tag_name }}"
         else
-          VERSION="openwrt-24.10.3-xiaomi-4c"
+          TAG_NAME="openwrt-24.10.3-xiaomi-4c"
         fi
-        
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git tag -a "$VERSION" -m "Release $VERSION"
-        git push origin "$VERSION"
-        
-        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
 
     - name: Delete existing release assets
       uses: actions/github-script@v7
       with:
         script: |
-          const { data: assets } = await github.rest.repos.listReleaseAssets({
+          const { data: releases } = await github.rest.repos.listReleases({
             owner: context.repo.owner,
-            repo: context.repo.repo,
-            release_id: context.payload.release.id
+            repo: context.repo.repo
           });
           
-          for (const asset of assets) {
-            await github.rest.repos.deleteReleaseAsset({
+          const targetRelease = releases.find(release => release.tag_name === '${{ steps.get_tag.outputs.tag_name }}');
+          
+          if (targetRelease) {
+            console.log(`Found release with tag: ${{ steps.get_tag.outputs.tag_name }}`);
+            console.log(`Release ID: ${targetRelease.id}`);
+            
+            const { data: assets } = await github.rest.repos.listReleaseAssets({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              asset_id: asset.id
+              release_id: targetRelease.id
             });
+            
+            console.log(`Found ${assets.length} assets to delete`);
+            
+            for (const asset of assets) {
+              console.log(`Deleting asset: ${asset.name} (ID: ${asset.id})`);
+              await github.rest.repos.deleteReleaseAsset({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                asset_id: asset.id
+              });
+            }
+            
+            console.log('All existing assets deleted');
+          } else {
+            console.log(`No release found with tag: ${{ steps.get_tag.outputs.tag_name }}`);
           }
-      if: github.event_name == 'release'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Upload files to release
+    - name: Upload files to existing release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ steps.tag_version.outputs.version }}
+        tag_name: ${{ steps.get_tag.outputs.tag_name }}
         files: |
           downloads/openwrt-imagebuilder-24.10.3-ramips-mt76x8.Linux-x86_64/bin/targets/ramips/mt76x8/*.bin
         overwrite: true
