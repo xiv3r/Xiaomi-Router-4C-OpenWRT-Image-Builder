@@ -12,6 +12,7 @@
 ```
 downloads/openwrt-imagebuilder-24.10.3-ramips-mt76x8.Linux-x86_64/bin/targets/ramips/mt76x8/*.bin
 ```
+=> See the [Openwrt Image Builder](https://openwrt.org/docs/guide-user/additional-software/imagebuilder)
 
 # Build using GitHub server
 => [Click this Templates](https://github.com/xiv3r/Xiaomi-Router-4C-OpenWRT-Image-Builder/generate)
