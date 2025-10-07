@@ -20,14 +20,14 @@ jobs:
     - name: Download files
       run: |
         sudo apt update
-        sudo apt install build-essential file libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-full python3-venv -y
+        sudo apt install tar build-essential file libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-full python3-venv -y
         mkdir -p downloads
         cd downloads
         wget https://archive.openwrt.org/releases/22.03.5/targets/ramips/mt76x8/openwrt-imagebuilder-22.03.5-ramips-mt76x8.Linux-x86_64.tar.xz
         tar --xz -xvf openwrt-imagebuilder-*.tar.xz
         cd openwrt-imagebuilder-*/
         sed -i 's/disabled/okay/g' target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
-        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci iw-full ip-full ethtool-full UDPspeeder zram-swap kmod-lib-lz4 nano netdiscover nmap luci-app-ttyd arp-scan arp-scan-database sudo"
+        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files ca-bundle dnsmasq-full dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci kmod-mt76 kmod-mtd-rw iw-full ip-full ethtool-full UDPspeeder zram-swap kmod-lib-lz4 nano netdiscover nmap luci-app-ttyd arp-scan arp-scan-database sudo"
         
     - name: Determine release tag
       id: get_tag
