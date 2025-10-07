@@ -3,7 +3,9 @@
 
 # Build using GitHub server
 => [Click this Templates](https://github.com/xiv3r/Xiaomi-Router-4C-OpenWRT-Image-Builder/generate)
+
 => Go to Actions => build => run workflows and wait until successful build 
+
 => The firmware is uploaded to your release page you can download and flash it.
 
 # Build Locally 
