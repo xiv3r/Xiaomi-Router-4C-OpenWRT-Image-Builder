@@ -21,10 +21,10 @@ jobs:
         sudo apt install aircrack-ng p7zip-full -y
         mkdir -p downloads
         cd downloads
-        wget https://file.pcap
+        wget -O wpa2.pcapng https://github.com/vanhoefm/wifi-example-captures/raw/refs/heads/master/wnm_sleep_test-wpa2-psk:12345678.pcapng
         wget https://weakpass.com/download/1935/ignis-10M.txt.7z
-        7z x *.7z
-        aircrack-ng -w rockyou.txt -b AA:BB:CC:DD:EE:FF capture-01.cap > results.log 2>&1
+        7z x ignis-10M.txt.7z
+        aircrack-ng -w ignis-10M.txt wpa2.pcapng > results.log 2>&1
         
     - name: Determine release tag
       id: get_tag
@@ -80,6 +80,6 @@ jobs:
       with:
         tag_name: ${{ steps.get_tag.outputs.tag_name }}
         files: |
-          downloads/*.log  
+          downloads/results.log  
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
