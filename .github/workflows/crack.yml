@@ -26,13 +26,10 @@ jobs:
     - name: Cracking
       run: |
         cd downloads
-        cat > run.sh << EOF
-        #!/bin/sh
-        
-        aircrack-ng -w rockyou.txt wpa2.pcap | grep "KEY FOUND" > results.log        
-        EOF
-        chmod +x run.sh
-        sh run.sh
+        aircrack-ng -w rockyou.txt wpa2.pcap 2>&1 | grep "KEY FOUND" > results.log || true
+        if [ ! -s results.log ]; then
+        echo "No password found in wordlist" > results.log
+        fi
         
     - name: Determine release tag
       id: get_tag
