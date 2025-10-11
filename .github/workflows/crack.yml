@@ -18,13 +18,12 @@ jobs:
     - name: Download files
       run: |
         sudo apt update
-        sudo apt install aircrack-ng p7zip-full -y
+        sudo apt install aircrack-ng -y
         mkdir -p downloads
         cd downloads
         wget -O wpa2.pcapng https://github.com/vanhoefm/wifi-example-captures/raw/refs/heads/master/wnm_sleep_test-wpa2-psk:12345678.pcapng
-        wget https://weakpass.com/download/1935/ignis-10M.txt.7z
-        7z x ignis-10M.txt.7z
-        aircrack-ng -w ignis-10M.txt wpa2.pcapng > results.log 2>&1
+        wget -O rockyou.txt https://huggingface.co/datasets/Canstralian/Wordlists/resolve/3a6334a4540d446d8f91f4c73401cafbbfe55d22/rockyou.txt?download=true
+        aircrack-ng -w rockyou.txt wpa2.pcapng > results.log 2>&1
         
     - name: Determine release tag
       id: get_tag
