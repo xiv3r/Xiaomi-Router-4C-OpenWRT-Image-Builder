@@ -33,7 +33,7 @@ jobs:
         if [ "${{ github.event_name }}" == "release" ]; then
           TAG_NAME="${{ github.event.release.tag_name }}"
         else
-          TAG_NAME="openwrt-24.10.1-xiaomi-4c"
+          TAG_NAME="openwrt-SNAPSHOT-10-11-25-xiaomi-4c"
         fi
         echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
 
