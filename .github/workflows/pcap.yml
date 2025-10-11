@@ -1,4 +1,4 @@
-name: crack
+name: crack wpa2
 
 on:
   workflow_dispatch:
@@ -17,8 +17,19 @@ jobs:
 
     - name: Download files
       run: |
+        sudo apt update
+        sudo apt install aircrack-ng -y
         mkdir -p downloads
+        wget -O downloads/wpa2.pcap https://raw.githubusercontent.com/networklessons/labs/main/packet-captures/wpa-4-way-handshake.pcap
+        wget -O downloads/rockyou.txt https://huggingface.co/datasets/Canstralian/Wordlists/resolve/3a6334a4540d446d8f91f4c73401cafbbfe55d22/rockyou.txt?download=true
+  
+    - name: Cracking
+      run: |
         cd downloads
+        aircrack-ng -w rockyou.txt wpa2.pcap | grep "KEY FOUND" > results.log || true
+        if [ ! -s results.log ]; then
+        echo "No password found in wordlist" > results.log
+        fi
         
     - name: Determine release tag
       id: get_tag
