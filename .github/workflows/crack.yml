@@ -25,13 +25,14 @@ jobs:
   
     - name: Cracking
       run: |
-        cat > downloads/run.sh << EOF
+        cd downloads
+        cat > run.sh << EOF
         #!/bin/sh
         
         aircrack-ng -w rockyou.txt wpa2.pcap | grep "KEY FOUND" > results.log        
         EOF
-        chmod +x downloads/run.sh
-        sh downloads/run.sh
+        chmod +x run.sh
+        sh run.sh
         
     - name: Determine release tag
       id: get_tag
