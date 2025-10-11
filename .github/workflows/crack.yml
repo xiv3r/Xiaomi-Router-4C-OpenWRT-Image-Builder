@@ -20,12 +20,12 @@ jobs:
         sudo apt update
         sudo apt install aircrack-ng -y
         mkdir -p downloads
-        cd downloads
-        wget -O wpa2.pcapng https://github.com/vanhoefm/wifi-example-captures/raw/refs/heads/master/wnm_sleep_test-wpa2-psk:12345678.pcapng
-        wget -O rockyou.txt https://huggingface.co/datasets/Canstralian/Wordlists/resolve/3a6334a4540d446d8f91f4c73401cafbbfe55d22/rockyou.txt?download=true
+        wget -O downloads/wpa2.pcapng https://github.com/vanhoefm/wifi-example-captures/raw/refs/heads/master/wnm_sleep_test-wpa2-psk:12345678.pcapng
+        wget -O downloads/rockyou.txt https://huggingface.co/datasets/Canstralian/Wordlists/resolve/3a6334a4540d446d8f91f4c73401cafbbfe55d22/rockyou.txt?download=true
   
     - name: Cracking
-      run: |    
+      run: |
+        cd downloads
         aircrack-ng -w rockyou.txt wpa2.pcapng > results.log
         
     - name: Determine release tag
