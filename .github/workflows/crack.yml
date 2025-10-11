@@ -1,4 +1,4 @@
-name: generate
+name: crack 
 
 on:
   workflow_dispatch:
