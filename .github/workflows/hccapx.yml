@@ -20,13 +20,15 @@ jobs:
         sudo apt update
         sudo apt install aircrack-ng -y
         mkdir -p downloads
-        wget -O downloads/wpa2.hccapx https://raw.githubusercontent.com/xiv3r/Xiaomi-Router-4C-OpenWRT-Image-Builder/refs/heads/main/.github/workflows/GHome_A1A33J.hccapx
-        wget -O downloads/rockyou.txt https://huggingface.co/datasets/Canstralian/Wordlists/resolve/3a6334a4540d446d8f91f4c73401cafbbfe55d22/rockyou.txt?download=true
+        # wget -O downloads/wpa2.hccapx https://raw.githubusercontent.com/xiv3r/Xiaomi-Router-4C-OpenWRT-Image-Builder/refs/heads/main/.github/workflows/GHome_A1A33J.hccapx
+        # wget -O downloads/rockyou.txt https://huggingface.co/datasets/Canstralian/Wordlists/resolve/3a6334a4540d446d8f91f4c73401cafbbfe55d22/rockyou.txt?download=true
+        wget -O downloads/pass.txt https://raw.githubusercontent.com/xiv3r/Xiaomi-Router-4C-OpenWRT-Image-Builder/refs/heads/main/.github/workflows/passwords.txt
+        wget -O downloads/89042.hccapx https://raw.githubusercontent.com/xiv3r/Xiaomi-Router-4C-OpenWRT-Image-Builder/refs/heads/main/.github/workflows/Capture-89042.hccapx
   
     - name: Cracking hccapx file
       run: |
         cd downloads
-        aircrack-ng -w rockyou.txt wpa2.hccapx | grep "KEY FOUND" | tee results.log
+        aircrack-ng -w pass.txt 89042.hccapx | grep "KEY FOUND" | tee results.log
         
     - name: Determine release tag
       id: get_tag
