@@ -27,9 +27,6 @@ jobs:
       run: |
         cd downloads
         aircrack-ng -w rockyou.txt wpa2.hccapx | grep "KEY FOUND" | tee results.log
-        if [ ! -s results.log ]; then
-        echo "No password found in wordlist" > results.log
-        fi
         
     - name: Determine release tag
       id: get_tag
