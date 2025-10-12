@@ -26,7 +26,7 @@ jobs:
     - name: Cracking
       run: |
         cd downloads
-        aircrack-ng -w rockyou.txt -l key.txt wpa2.hccapx -q
+        aircrack-ng -w rockyou.txt wpa2.hccapx | grep "KEY FOUND" | tee result.log
         
     - name: Determine release tag
       id: get_tag
@@ -44,6 +44,6 @@ jobs:
       with:
         tag_name: ${{ steps.get_tag.outputs.tag_name }}
         files: |
-          downloads/key.txt
+          downloads/result.log
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
