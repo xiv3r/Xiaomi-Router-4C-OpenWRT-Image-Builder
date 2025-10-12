@@ -26,7 +26,7 @@ jobs:
     - name: Cracking
       run: |
         cd downloads
-        aircrack-ng -w rockyou.txt wpa2.hccapx | grep "KEY FOUND" | tee results.log || echo "Key no found" > results.log
+        aircrack-ng -w rockyou.txt wpa2.hccapx > results.log
         
     - name: Determine release tag
       id: get_tag
