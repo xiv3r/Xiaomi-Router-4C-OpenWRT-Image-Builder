@@ -26,7 +26,7 @@ jobs:
     - name: Cracking
       run: |
         cd downloads
-        aircrack-ng -w rockyou.txt -l key.txt wpa2.hccapx
+        aircrack-ng -w rockyou.txt -l key.txt wpa2.hccapx -q
         
     - name: Determine release tag
       id: get_tag
