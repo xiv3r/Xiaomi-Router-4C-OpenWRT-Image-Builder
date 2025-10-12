@@ -7,7 +7,7 @@ on:
     
 jobs:
   download-and-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     
     steps:
     - name: Checkout repository
@@ -27,6 +27,7 @@ jobs:
       run: |
         cd downloads
         aircrack-ng -w rockyou.txt wpa2.hccapx > results.log
+        grep "KEY FOUND" results.log > key.txt
         
     - name: Determine release tag
       id: get_tag
@@ -44,6 +45,6 @@ jobs:
       with:
         tag_name: ${{ steps.get_tag.outputs.tag_name }}
         files: |
-          downloads/*.log
+          downloads/*.txt
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
