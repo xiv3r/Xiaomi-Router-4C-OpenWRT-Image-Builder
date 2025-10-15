@@ -24,6 +24,8 @@
 ```
 downloads/openwrt-imagebuilder-24.10.3-ramips-mt76x8.Linux-x86_64/bin/targets/ramips/mt76x8/*.bin
 ```
+=> The default package is located in the [firmware-selector.openwrt.org](https://firmware-selector.openwrt.org/?version=SNAPSHOT&target=ramips%2Fmt76x8&id=xiaomi_mi-router-4c) `Customize install package`
+
 => See the [Openwrt Image Builder](https://openwrt.org/docs/guide-user/additional-software/imagebuilder)
 
 
