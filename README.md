@@ -57,6 +57,10 @@ cd openwrt-imagebuilder-*/
 ```
 make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci kmod-mt76 kmod-mtd-rw iw-full ethtool-full ip-full UDPspeeder zram-swap nano netdiscover"
 ```
+### Firmware path
+```
+/bin/targets/ramips/mt76x8/firmware.bin
+```
 ### Clean existing configuration
 ```sh
 make clean
