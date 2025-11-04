@@ -1,4 +1,4 @@
-name: building xiaomi 4c firmware
+name: build snapshot firmware
 
 on:
   workflow_dispatch:
