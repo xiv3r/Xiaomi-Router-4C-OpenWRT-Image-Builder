@@ -30,7 +30,7 @@ jobs:
 
         # Clone OpenWrt sources for the 24.10 branch and checkout exact commit
         git clone https://github.com/openwrt/openwrt.git openwrt-src --depth 1 --branch openwrt-24.10
-        cd openwrt-src
+        cd openwrt-*
 
         # Ensure exact commit (r28959 -> commit suffix 29397011cc)
         # Attempt shallow fetch; if it fails, fetch full object
@@ -113,6 +113,6 @@ jobs:
       with:
         tag_name: ${{ steps.get_tag.outputs.tag_name }}
         files: |
-          downloads/openwrt-src/bin/targets/ramips/mt76x8/*.bin
+          downloads/openwrt-*/bin/targets/ramips/mt76x8/*.bin
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
