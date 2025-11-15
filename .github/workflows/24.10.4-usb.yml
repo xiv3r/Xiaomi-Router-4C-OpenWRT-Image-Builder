@@ -34,10 +34,10 @@ jobs:
 
         # Ensure exact commit (r28959 -> commit suffix 29397011cc)
         # Attempt shallow fetch; if it fails, fetch full object
-        if ! git fetch --depth=1 origin ${{ env.OPENWRT_COMMIT }}; then
-          git fetch origin ${{ env.OPENWRT_COMMIT }}
-        fi
-        git reset --hard ${{ env.OPENWRT_COMMIT }}
+        #if ! git fetch --depth=1 origin ${{ env.OPENWRT_COMMIT }}; then
+        # git fetch origin ${{ env.OPENWRT_COMMIT }}
+        #fi
+        #git reset --hard ${{ env.OPENWRT_COMMIT }}
 
         # Update and install feeds
         ./scripts/feeds update -a
