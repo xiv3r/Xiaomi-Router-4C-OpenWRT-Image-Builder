@@ -1,4 +1,4 @@
-name: build stable firmware
+name: building 24.10.4
 
 on:
   workflow_dispatch:
