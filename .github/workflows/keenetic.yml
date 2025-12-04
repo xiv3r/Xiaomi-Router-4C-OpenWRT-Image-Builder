@@ -20,8 +20,13 @@ jobs:
         sudo apt update
         sudo apt install -y attr bc build-essential curl file gawk git gperf jq libhtml-parser-perl libjson-perl libncurses-dev libssl-dev libxml-libxml-perl lzip python3 subversion unzip zlib1g-dev
         
-        git clone --depth 1 --branch 4.03.C.3.0-3 https://github.com/keenetic/keenetic-sdk.git
+        git clone --depth 1 --branch 4.02.C.1.0-1 https://github.com/keenetic/keenetic-sdk.git
         cd keenetic-sdk
+        
+        wget -O keenetic.bin https://help.keenetic.com/hc/article_attachments/16567968484124
+        ./unpack keenetic.bin
+
+        make
         
     - name: Determine release tag
       id: get_tag
