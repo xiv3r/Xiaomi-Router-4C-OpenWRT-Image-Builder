@@ -1,4 +1,4 @@
-name: build snapshot firmware
+name: build snapshot
 
 on:
   workflow_dispatch:
@@ -21,10 +21,13 @@ jobs:
         sudo apt install tar build-essential file libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-full python3-venv -y
         mkdir -p downloads
         cd downloads
+        
         wget https://downloads.openwrt.org/snapshots/targets/ramips/mt76x8/openwrt-imagebuilder-ramips-mt76x8.Linux-x86_64.tar.zst
         tar --zstd -xf openwrt-imagebuilder-*.tar.zst
+        
         cd openwrt-imagebuilder-*/
         sed -i 's/disabled/okay/g' target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
+        
         make image PROFILE="xiaomi_mi-router-4c" PACKAGES="apk-mbedtls base-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci kmod-mt76 kmod-mtd-rw iw-full ip-full ethtool-full UDPspeeder zram-swap kmod-lib-lz4 nano netdiscover nmap luci-app-ttyd arp-scan arp-scan-database sudo"
         
     - name: Determine release tag
@@ -33,7 +36,7 @@ jobs:
         if [ "${{ github.event_name }}" == "release" ]; then
           TAG_NAME="${{ github.event.release.tag_name }}"
         else
-          TAG_NAME="openwrt-SNAPSHOT-10-11-25-xiaomi-4c"
+          TAG_NAME="openwrt-snapshot-xiaomi-4c-12-5-2025"
         fi
         echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
 
