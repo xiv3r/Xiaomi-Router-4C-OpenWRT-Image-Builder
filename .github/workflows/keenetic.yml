@@ -24,7 +24,7 @@ jobs:
         cd keenetic-sdk
         
         wget -O keenetic.bin https://help.keenetic.com/hc/article_attachments/16567968484124
-        ./unpack keenetic.bin
+        ./unpack.sh keenetic.bin
 
         make
         
