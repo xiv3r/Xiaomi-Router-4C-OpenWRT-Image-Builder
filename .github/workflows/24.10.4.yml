@@ -15,7 +15,7 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Download files
+    - name: Compiling Firmware
       run: |
         sudo apt update
         sudo apt install tar build-essential file libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-full python3-venv -y
@@ -24,7 +24,7 @@ jobs:
         cd downloads
         
         wget https://downloads.openwrt.org/releases/24.10.4/targets/ramips/mt76x8/openwrt-imagebuilder-24.10.4-ramips-mt76x8.Linux-x86_64.tar.zst
-        tar --zstd -xf openwrt-imagebuilder-*.tar.zst
+        tar -xf openwrt-imagebuilder-*.tar.zst
         
         cd openwrt-imagebuilder-*/
         
@@ -81,7 +81,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Upload files to existing release
+    - name: Uploading files
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ steps.get_tag.outputs.tag_name }}
