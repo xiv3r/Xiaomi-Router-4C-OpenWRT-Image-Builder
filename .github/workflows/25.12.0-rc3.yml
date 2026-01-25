@@ -18,8 +18,8 @@ jobs:
     - name: Compiling Firmware
       run: |
         sudo apt update
-        sudo apt install tar build-essential file libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-full python3-venv -y
-        
+        sudo apt install -y build-essential file libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-setuptools
+
         mkdir -p downloads
         cd downloads
         
