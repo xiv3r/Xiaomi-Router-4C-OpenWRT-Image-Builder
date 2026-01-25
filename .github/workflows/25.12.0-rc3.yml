@@ -1,0 +1,91 @@
+name: 25.12.0-rc3
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+    
+jobs:
+  download-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Compiling Firmware
+      run: |
+        sudo apt update
+        sudo apt install tar build-essential file libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-full python3-venv -y
+        
+        mkdir -p downloads
+        cd downloads
+        
+        wget https://downloads.openwrt.org/releases/24.10.4/targets/ramips/mt76x8/openwrt-imagebuilder-24.10.4-ramips-mt76x8.Linux-x86_64.tar.zst
+        tar -xf openwrt-imagebuilder-*.tar.zst
+        
+        cd openwrt-imagebuilder-*/
+        
+        sed -i 's/disabled/okay/g' target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
+        
+        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci kmod-mt76 kmod-mtd-rw iw-full ip-full ethtool-full UDPspeeder zram-swap kmod-lib-lz4 nano netdiscover nmap luci-app-ttyd arp-scan arp-scan-database sudo"
+        
+    - name: Determine release tag
+      id: get_tag
+      run: |
+        if [ "${{ github.event_name }}" == "release" ]; then
+          TAG_NAME="${{ github.event.release.tag_name }}"
+        else
+          TAG_NAME="openwrt-stable-25.12.0-rc3-xiaomi-4c"
+        fi
+        echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+
+    - name: Delete existing release assets
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { data: releases } = await github.rest.repos.listReleases({
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          });
+          
+          const targetRelease = releases.find(release => release.tag_name === '${{ steps.get_tag.outputs.tag_name }}');
+          
+          if (targetRelease) {
+            console.log(`Found release with tag: ${{ steps.get_tag.outputs.tag_name }}`);
+            console.log(`Release ID: ${targetRelease.id}`);
+            
+            const { data: assets } = await github.rest.repos.listReleaseAssets({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: targetRelease.id
+            });
+            
+            console.log(`Found ${assets.length} assets to delete`);
+            
+            for (const asset of assets) {
+              console.log(`Deleting asset: ${asset.name} (ID: ${asset.id})`);
+              await github.rest.repos.deleteReleaseAsset({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                asset_id: asset.id
+              });
+            }
+            
+            console.log('All existing assets deleted');
+          } else {
+            console.log(`No release found with tag: ${{ steps.get_tag.outputs.tag_name }}`);
+          }
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Uploading files
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.get_tag.outputs.tag_name }}
+        files: |
+          downloads/openwrt-*/bin/targets/ramips/mt76x8/*.bin
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
