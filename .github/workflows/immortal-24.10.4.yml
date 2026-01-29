@@ -1,0 +1,91 @@
+name: Immortalwrt 24.10.4
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+    
+jobs:
+  download-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Compiling Firmware
+      run: |
+        sudo apt update
+        sudo apt install tar build-essential file libncurses-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip python3 python3-full python3-venv -y
+        
+        mkdir -p downloads
+        cd downloads
+        
+        wget 
+        tar -xf immortalwrt-imagebuilder-*.tar.zst
+        
+        cd immortalwrt-imagebuilder-*/
+        
+        sed -i 's/disabled/okay/g' target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
+        
+        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="kmod-mt76 kmod-mtd-rw iw-full ip-full ethtool-full UDPspeeder zram-swap kmod-lib-lz4 nano netdiscover nmap luci-app-ttyd arp-scan arp-scan-database sudo"
+        
+    - name: Determine release tag
+      id: get_tag
+      run: |
+        if [ "${{ github.event_name }}" == "release" ]; then
+          TAG_NAME="${{ github.event.release.tag_name }}"
+        else
+          TAG_NAME="immortalwrt-stable-24.10.4-xiaomi-4c"
+        fi
+        echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+
+    - name: Delete existing release assets
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { data: releases } = await github.rest.repos.listReleases({
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          });
+          
+          const targetRelease = releases.find(release => release.tag_name === '${{ steps.get_tag.outputs.tag_name }}');
+          
+          if (targetRelease) {
+            console.log(`Found release with tag: ${{ steps.get_tag.outputs.tag_name }}`);
+            console.log(`Release ID: ${targetRelease.id}`);
+            
+            const { data: assets } = await github.rest.repos.listReleaseAssets({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: targetRelease.id
+            });
+            
+            console.log(`Found ${assets.length} assets to delete`);
+            
+            for (const asset of assets) {
+              console.log(`Deleting asset: ${asset.name} (ID: ${asset.id})`);
+              await github.rest.repos.deleteReleaseAsset({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                asset_id: asset.id
+              });
+            }
+            
+            console.log('All existing assets deleted');
+          } else {
+            console.log(`No release found with tag: ${{ steps.get_tag.outputs.tag_name }}`);
+          }
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Uploading files
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.get_tag.outputs.tag_name }}
+        files: |
+          downloads/immortawrt-*/bin/targets/ramips/mt76x8/*.bin
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
