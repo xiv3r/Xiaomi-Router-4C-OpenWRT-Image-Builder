@@ -1,4 +1,4 @@
-name: build snapshot
+name: Openwrt Snapshot
 
 on:
   workflow_dispatch:
@@ -36,7 +36,7 @@ jobs:
         if [ "${{ github.event_name }}" == "release" ]; then
           TAG_NAME="${{ github.event.release.tag_name }}"
         else
-          TAG_NAME="openwrt-snapshot-xiaomi-4c-12-5-2025"
+          TAG_NAME="openwrt-snapshot-xiaomi-4c"
         fi
         echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
 
