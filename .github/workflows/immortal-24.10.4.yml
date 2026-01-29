@@ -23,14 +23,14 @@ jobs:
         mkdir -p downloads
         cd downloads
         
-        wget 
+        wget https://immortalwrt.kyarucloud.moe/releases/24.10.4/targets/ramips/mt76x8/immortalwrt-imagebuilder-24.10.4-ramips-mt76x8.Linux-x86_64.tar.zst
         tar -xf immortalwrt-imagebuilder-*.tar.zst
         
         cd immortalwrt-imagebuilder-*/
         
         sed -i 's/disabled/okay/g' target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
         
-        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="kmod-mt76 kmod-mtd-rw iw-full ip-full ethtool-full UDPspeeder zram-swap kmod-lib-lz4 nano netdiscover nmap luci-app-ttyd arp-scan arp-scan-database sudo"
+        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files block-mount ca-bundle default-settings-chn dnsmasq-full dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nf-nathelper kmod-nf-nathelper-extra kmod-nft-offload libc libgcc libustream-openssl logd luci-app-package-manager luci-compat luci-lib-base luci-lib-ipkg luci-light mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-openssl uboot-envtools kmod-mt76 kmod-mtd-rw iw-full ip-full ethtool-full zram-swap kmod-lib-lz4 nano netdiscover nmap luci-app-ttyd arp-scan arp-scan-database sudo"
         
     - name: Determine release tag
       id: get_tag
