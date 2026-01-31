@@ -30,7 +30,7 @@ jobs:
         
         sed -i 's/disabled/okay/g' target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
         
-        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="apk-mbedtls base-files ca-bundle dnsmasq dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-mbedtls logd mtd netifd nftables odhcp6c odhcpd-ipv6only ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-mbedtls uboot-envtools luci kmod-mt76 kmod-mtd-rw iw-full ip-full ethtool-full zram-swap nano"
+        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="apk-mbedtls base-files ca-bundle dropbear firewall4 fstools kmod-gpio-button-hotplug kmod-leds-gpio kmod-mt7603 kmod-nft-offload libc libgcc libustream-wolfssl logd mtd netifd nftables odhcp6c odhcpd-ipv6only ppp ppp-mod-pppoe swconfig uci uclient-fetch urandom-seed urngd wpad-basic-wolfssl uboot-envtools luci kmod-mt76 kmod-mtd-rw kmod-lib-lz4 zram-swap nano iw-full ip-full ethtool-full dnsmasq-full"
         
     - name: Determine release tag
       id: get_tag
