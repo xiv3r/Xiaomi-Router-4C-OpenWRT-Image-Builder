@@ -25,7 +25,7 @@ jobs:
         cd downloads
         
         wget https://downloads.openwrt.org/snapshots/targets/ramips/mt76x8/openwrt-imagebuilder-ramips-mt76x8.Linux-x86_64.tar.zst
-        tar --zstd -xf openwrt-imagebuilder-*.tar.zst
+        tar -xf openwrt-imagebuilder-*.tar.zst
         
         cd openwrt-imagebuilder-*/
         sed -i 's/disabled/okay/g' target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
