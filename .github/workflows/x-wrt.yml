@@ -20,7 +20,7 @@ jobs:
     - name: Download files
       run: |
         sudo apt update
-        sudo apt install binutils bzip2 diff find flex gawk gcc getopt grep install libc-dev libz-dev make perl python-all-dev  rsync subversion unzip which -y
+        sudo apt install binutils bzip2 diff find flex gawk gcc getopt grep install libc-dev libz-dev make perl python3 rsync subversion unzip which -y
         
         mkdir -p downloads
         cd downloads
