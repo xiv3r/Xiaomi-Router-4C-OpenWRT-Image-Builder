@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   release:
     types: [published]
+  schedule:
+    - cron: "0 0 * * 0"
 
 jobs:
   download-and-release:
