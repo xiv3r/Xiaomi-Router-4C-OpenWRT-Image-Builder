@@ -25,7 +25,7 @@ jobs:
         mkdir -p downloads
         cd downloads
         
-        wget https://immortalwrt.kyarucloud.moe/snapshots/targets/ramips/mt76x8/immortalwrt-imagebuilder-ramips-mt76x8.Linux-x86_64.tar.zst
+        wget https://downloads.immortalwrt.org/snapshots/targets/ramips/mt76x8/immortalwrt-imagebuilder-ramips-mt76x8.Linux-x86_64.tar.zst
         tar -xf immortalwrt-imagebuilder-*.tar.zst
         
         cd immortalwrt-imagebuilder-*/
