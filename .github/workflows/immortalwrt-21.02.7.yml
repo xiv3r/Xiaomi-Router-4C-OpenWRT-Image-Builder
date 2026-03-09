@@ -32,7 +32,7 @@ jobs:
         
         sed -i 's/disabled/okay/g' target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
         
-        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files block-mount busybox ca-bundle default-settings-chn dnsmasq-full dropbear firewall fstools iptables ipv6helper kmod-gpio-button-hotplug kmod-ipt-raw kmod-leds-gpio kmod-mt7603 kmod-nf-nathelper kmod-nf-nathelper-extra libc libgcc libustream-openssl logd luci luci-app-filetransfer luci-app-turboacc luci-compat luci-lib-base luci-lib-fs luci-lib-ipkg mtd netifd opkg ppp ppp-mod-pppoe procd swconfig uci uclient-fetch urandom-seed urngd wpad-basic-openssl uboot-envtools kmod-mt76 kmod-mtd-rw iw-full ip-full ethtool-full zram-swap kmod-lib-lz4 nano netdiscover arp-scan arp-scan-database"
+        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files block-mount busybox ca-bundle default-settings-chn dnsmasq-full dropbear firewall fstools iptables ipv6helper kmod-gpio-button-hotplug kmod-ipt-raw kmod-leds-gpio kmod-mt7603 kmod-nf-nathelper kmod-nf-nathelper-extra libc libgcc libustream-openssl logd luci luci-app-filetransfer luci-app-turboacc luci-compat luci-lib-base luci-lib-fs luci-lib-ipkg mtd netifd opkg ppp ppp-mod-pppoe procd swconfig uci uclient-fetch urandom-seed urngd wpad-basic-openssl uboot-envtools kmod-mt76 kmod-mtd-rw ip-full zram-swap kmod-lib-lz4 nano netdiscover arp-scan arp-scan-database"
         
     - name: Determine release tag
       id: get_tag
