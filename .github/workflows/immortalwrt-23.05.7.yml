@@ -1,4 +1,4 @@
-name: Immortalwrt 24.10.5
+name: Immortalwrt 23.05.7
 
 on:
   workflow_dispatch:
