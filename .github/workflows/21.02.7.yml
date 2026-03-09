@@ -31,7 +31,7 @@ jobs:
         cd openwrt-imagebuilder-*/
         sed -i 's/disabled/okay/g' target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
         
-        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files busybox ca-bundle dnsmasq dropbear firewall fstools ip6tables iptables kmod-gpio-button-hotplug kmod-ipt-offload kmod-leds-gpio kmod-mt7603 libc libgcc libustream-wolfssl logd mtd netifd odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe procd swconfig uci uclient-fetch urandom-seed urngd wpad-basic-wolfssl uboot-envtools luci kmod-mt76 kmod-mtd-rw iw-full ip-full ethtool-full zram-swap kmod-lib-lz4 nano"
+        make image PROFILE="xiaomi_mi-router-4c" PACKAGES="base-files busybox ca-bundle dnsmasq dropbear firewall fstools ip6tables iptables kmod-gpio-button-hotplug kmod-ipt-offload kmod-leds-gpio kmod-mt7603 libc libgcc libustream-wolfssl logd mtd netifd odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe procd swconfig uci uclient-fetch urandom-seed urngd wpad-basic-wolfssl uboot-envtools luci kmod-mt76 kmod-mtd-rw zram-swap nano"
         
     - name: Determine release tag
       id: get_tag
